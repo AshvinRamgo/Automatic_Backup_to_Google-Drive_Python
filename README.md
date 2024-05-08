@@ -1,4 +1,4 @@
-** Automatic Backup to Google Drive **
+**Automatic Backup to Google Drive**
 
 Description:
 This Python script provides a simple integration with the Google Drive API to backup files from your local computer to a specified folder on Google Drive. It utilizes the Google Drive API client library to authenticate users, upload new files and update existing files to a Google Drive Folder.
