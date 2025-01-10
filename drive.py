@@ -61,7 +61,8 @@ class MyDrive():
           'parents' : [folder_id]
         }
         file = self.service.files().create(body=file_metadata, media_body=media, fields='id').execute()
-        print(f"A new File was created {file.get('id')}")
+        print(f"A new File was created: {file_metadata.get('name')}")
+        return {"message": "A new File was created", "file_name": file_metadata.get('name')}
       else:
         for file in response.get('files', []):
           update_file = self.service.files().update(
@@ -69,19 +70,10 @@ class MyDrive():
             media_body=media,
           ).execute()
           print(f'Updated File')
+          return {"message": "Updated File", "file_name": filename}
     except HttpError as error:
       print(f"An error occurred: {error}")
+      return {"message": f"An error occurred: {error}"}
 
 load_dotenv()
 
-def main():
-  path = os.getenv('FILE_PATH')
-  my_drive = MyDrive()
-  files = os.listdir(path)
-  for item in files: 
-    if not item.startswith('.'): 
-      my_drive.upload_file(item, path)
-      print(item)
-
-if __name__ == "__main__":
-  main()
